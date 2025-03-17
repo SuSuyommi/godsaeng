@@ -112,6 +112,42 @@
             height: 300px;
             z-index: 1000; /* 가장 바깥에 표시되도록 z-index 설정 */
         }
+        @media (max-width: 600px) {
+            .card {
+                width: 90%;
+                padding: 10px;
+            }
+            #container {
+                height: 300px; /* 모바일에서 높이 조정 */
+            }
+            .heart {
+                font-size: 20px; /* 모바일에서 하트 크기 조정 */
+            }
+            .heart-number {
+                font-size: 15px; /* 모바일에서 숫자 크기 조정 */
+                width: 20px; /* 모바일에서 하트 크기와 맞춤 */
+                height: 20px; /* 모바일에서 하트 크기와 맞춤 */
+                line-height: 20px; /* 모바일에서 숫자를 하트 중앙에 맞춤 */
+            }
+            button {
+                padding: 5px 10px;
+                font-size: 14px; /* 모바일에서 글씨체 크기 줄임 */
+                margin-left: 5px;
+            }
+            input[type="text"] {
+                width: 70%; /* 모바일에서 너비 조정 */
+                padding: 5px;
+                font-size: 14px; /* 모바일에서 글씨체 크기 줄임 */
+            }
+            .goal-display {
+                font-size: 20px; /* 모바일에서 글씨체 크기 줄임 */
+                padding: 5px;
+            }
+            #chamzalImage {
+                width: 200px; /* 모바일에서 이미지 크기 조정 */
+                height: 200px; /* 모바일에서 이미지 크기 조정 */
+            }
+        }
     </style>
 </head>
 <body>
