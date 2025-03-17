@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FFFACD; /* 연노랑색 */
+            margin: 0;
+            font-family: 'Cute Font', cursive, sans-serif;
+        }
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 600px;
+        }
+        #container {
+            position: relative;
+            width: 100%;
+            height: 400px; /* 높이 조정 */
+            margin-bottom: 20px;
+        }
+        #baseImage {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+        .heart {
+            position: absolute;
+            font-size: 30px; /* 하트 크기 조정 */
+            color: #FFEB3B; /* 개나리색 */
+        }
+        .heart-number {
+            position: absolute;
+            font-size: 20px; /* 숫자 크기 조정 */
+            color: #000;
+            text-align: center;
+            width: 30px; /* 하트 크기와 맞춤 */
+            height: 30px; /* 하트 크기와 맞춤 */
+            line-height: 30px; /* 숫자를 하트 중앙에 맞춤 */
+        }
+        button {
+            background-color: #FFFACD; /* 연노랑색 */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px; /* 글씨체 크기 줄임 */
+            font-family: 'Cute Font', cursive, sans-serif; /* 둥글둥글한 귀여운 글씨체 */
+            border-radius: 12px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #FFEB3B; /* 버튼에 마우스를 올렸을 때 색상 변경 */
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 60%; /* 너비를 줄여 버튼들이 한 줄에 오도록 조정 */
+            padding: 10px;
+            border: 2px solid #FFFACD;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Cute Font', cursive, sans-serif;
+            margin-right: 10px;
+        }
+        .goal-display {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+            background-color: #FFFACD; /* 연노랑색 */
+            padding: 10px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            position: relative;
+        }
+        .goal-display::before {
+            content: "💛";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            font-size: 24px;
+        }
+        .goal-display::after {
+            content: "💛";
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 24px;
+        }
+        #chamzalImage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            z-index: 1000; /* 가장 바깥에 표시되도록 z-index 설정 */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>갓생 도전 작심 30일!</h1>
+        <p>나는 할 수 이따아~</p>
+        <div class="goal-display" id="goalDisplay"></div>
+        <div class="input-container">
+            <input type="text" id="goalInput" placeholder="목표를 입력하세요">
+            <button onclick="setGoal()">목표 설정</button>
+            <button onclick="resetGoal()">목표 재설정</button>
+        </div>
+        <div id="container">
+            <svg id="baseImage" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="600" height="300" fill="#FFFACD" stroke="#ccc" stroke-width="1"/> <!-- 배경을 연노랑색으로 변경 -->
+                <g font-family="Cute Font" font-size="15" fill="#000" text-anchor="middle">
+                    <g transform="translate(50, 40)">
+                        <text class="heart-number" y="5">1</text>
+                    </g>
+                    <g transform="translate(150, 40)">
+                        <text class="heart-number" y="5">2</text>
+                    </g>
+                    <g transform="translate(250, 40)">
+                        <text class="heart-number" y="5">3</text>
+                    </g>
+                    <g transform="translate(350, 40)">
+                        <text class="heart-number" y="5">4</text>
+                    </g>
+                    <g transform="translate(450, 40)">
+                        <text class="heart-number" y="5">5</text>
+                    </g>
+                    <g transform="translate(550, 40)">
+                        <text class="heart-number" y="5">6</text>
+                    </g>
+                    <g transform="translate(50, 90)">
+                        <text class="heart-number" y="5">7</text>
+                    </g>
+                    <g transform="translate(150, 90)">
+                        <text class="heart-number" y="5">8</text>
+                    </g>
+                    <g transform="translate(250, 90)">
+                        <text class="heart-number" y="5">9</text>
+                    </g>
+                    <g transform="translate(350, 90)">
+                        <text class="heart-number" y="5">10</text>
+                    </g>
+                    <g transform="translate(450, 90)">
+                        <text class="heart-number" y="5">11</text>
+                    </g>
+                    <g transform="translate(550, 90)">
+                        <text class="heart-number" y="5">12</text>
+                    </g>
+                    <g transform="translate(50, 140)">
+                        <text class="heart-number" y="5">13</text>
+                    </g>
+                    <g transform="translate(150, 140)">
+                        <text class="heart-number" y="5">14</text>
+                    </g>
+                    <g transform="translate(250, 140)">
+                        <text class="heart-number" y="5">15</text>
+                    </g>
+                    <g transform="translate(350, 140)">
+                        <text class="heart-number" y="5">16</text>
+                    </g>
+                    <g transform="translate(450, 140)">
+                        <text class="heart-number" y="5">17</text>
+                    </g>
+                    <g transform="translate(550, 140)">
+                        <text class="heart-number" y="5">18</text>
+                    </g>
+                    <g transform="translate(50, 190)">
+                        <text class="heart-number" y="5">19</text>
+                    </g>
+                    <g transform="translate(150, 190)">
+                        <text class="heart-number" y="5">20</text>
+                    </g>
+                    <g transform="translate(250, 190)">
+                        <text class="heart-number" y="5">21</text>
+                    </g>
+                    <g transform="translate(350, 190)">
+                        <text class="heart-number" y="5">22</text>
+                    </g>
+                    <g transform="translate(450, 190)">
+                        <text class="heart-number" y="5">23</text>
+                    </g>
+                    <g transform="translate(550, 190)">
+                        <text class="heart-number" y="5">24</text>
+                    </g>
+                    <g transform="translate(50, 240)">
+                        <text class="heart-number" y="5">25</text>
+                    </g>
+                    <g transform="translate(150, 240)">
+                        <text class="heart-number" y="5">26</text>
+                    </g>
+                    <g transform="translate(250, 240)">
+                        <text class="heart-number" y="5">27</text>
+                    </g>
+                    <g transform="translate(350, 240)">
+                        <text class="heart-number" y="5">28</text>
+                    </g>
+                    <g transform="translate(450, 240)">
+                        <text class="heart-number" y="5">29</text>
+                    </g>
+                    <g transform="translate(550, 240)">
+                        <text class="heart-number" y="5">30</text>
+                    </g>
+                </g>
+            </svg>
+            <img id="chamzalImage" src="chamzal.png" alt="Chamzal">
+        </div>
+        <button onclick="removeLastHeart()">-💛</button>
+        <button onclick="showNextImage()">오늘도 성공</button>
+        <button onclick="toggleChamzalImage()">갓생 성공</button>
+        <button onclick="captureImage()">이미지 저장</button>
+    </div>
+
+    <script>
+        let currentHeartIndex = 0;
+        const heartPositions = [
+            { top: '65px', left: '30px' },  // 1
+            { top: '65px', left: '130px' },  // 2
+            { top: '65px', left: '230px' }, // 3
+            { top: '65px', left: '330px' }, // 4
+            { top: '65px', left: '430px' }, // 5
+            { top: '65px', left: '530px' }, // 6
+            { top: '115px', left: '30px' },  // 7
+            { top: '115px', left: '130px' },  // 8
+            { top: '115px', left: '230px' }, // 9
+            { top: '115px', left: '330px' }, // 10
+            { top: '115px', left: '430px' }, // 11
+            { top: '115px', left: '530px' }, // 12
+            { top: '165px', left: '30px' }, // 13
+            { top: '165px', left: '130px' }, // 14
+            { top: '165px', left: '230px' }, // 15
+            { top: '165px', left: '330px' }, // 16
+            { top: '165px', left: '430px' }, // 17
+            { top: '165px', left: '530px' }, // 18
+            { top: '215px', left: '30px' }, // 19
+            { top: '215px', left: '130px' }, // 20
+            { top: '215px', left: '230px' }, // 21
+            { top: '215px', left: '330px' }, // 22
+            { top: '215px', left: '430px' }, // 23
+            { top: '215px', left: '530px' }, // 24
+            { top: '265px', left: '30px' }, // 25
+            { top: '265px', left: '130px' }, // 26
+            { top: '265px', left: '230px' }, // 27
+            { top: '265px', left: '330px' }, // 28
+            { top: '265px', left: '430px' }, // 29
+            { top: '265px', left: '530px' }  // 30
+        ];
+
+        function showNextImage() {
+            if (currentHeartIndex < heartPositions.length) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.top = heartPositions[currentHeartIndex].top;
+                heart.style.left = heartPositions[currentHeartIndex].left;
+                heart.textContent = '💛';
+                document.getElementById('container').appendChild(heart);
+                currentHeartIndex++;
+            }
+        }
+
+        function removeLastHeart() {
+            if (currentHeartIndex > 0) {
+                currentHeartIndex--;
+                const hearts = document.querySelectorAll('.heart');
+                hearts[hearts.length - 1].remove();
+            }
+        }
+
+        function setGoal() {
+            const goalInput = document.getElementById('goalInput');
+            const goalDisplay = document.getElementById('goalDisplay');
+            goalDisplay.textContent = goalInput.value;
+            goalInput.style.display = 'none';
+            document.querySelector('.input-container button').style.display = 'none';
+        }
+
+        function resetGoal() {
+            const goalInput = document.getElementById('goalInput');
+            const goalDisplay = document.getElementById('goalDisplay');
+            goalDisplay.textContent = '';
+            goalInput.style.display = 'block';
+            goalInput.value = '';
+            document.querySelector('.input-container button').style.display = 'block';
+            const hearts = document.querySelectorAll('.heart');
+            hearts.forEach(heart => heart.remove());
+            currentHeartIndex = 0;
+        }
+
+        function toggleChamzalImage() {
+            const chamzalImage = document.getElementById('chamzalImage');
+            if (chamzalImage.style.display === 'block') {
+                chamzalImage.style.display = 'none';
+            } else {
+                chamzalImage.style.display = 'block';
+            }
+        }
+
+        function captureImage() {
+            const container = document.getElementById('container');
+            html2canvas(container).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'capture.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</body>
+</html>
