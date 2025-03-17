@@ -302,13 +302,15 @@
         ];
 
         function showNextImage() {
+            const container = document.getElementById('container');
+            const scaleFactor = container.offsetWidth / 600; // 600은 원래 너비
             if (currentHeartIndex < heartPositions.length) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
-                heart.style.top = heartPositions[currentHeartIndex].top;
-                heart.style.left = heartPositions[currentHeartIndex].left;
+                heart.style.top = `calc(${heartPositions[currentHeartIndex].top} * ${scaleFactor})`;
+                heart.style.left = `calc(${heartPositions[currentHeartIndex].left} * ${scaleFactor})`;
                 heart.textContent = '💛';
-                document.getElementById('container').appendChild(heart);
+                container.appendChild(heart);
                 currentHeartIndex++;
             }
         }
