@@ -22,6 +22,7 @@
             padding: 20px;
             text-align: center;
             width: 600px;
+            position: relative;
         }
         #container {
             position: relative;
@@ -114,7 +115,7 @@
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="card" id="card">
         <h1>갓생 도전 작심 30일!</h1>
         <p>나는 할 수 이따아~</p>
         <div class="goal-display" id="goalDisplay"></div>
@@ -314,8 +315,8 @@
         }
 
         function captureImage() {
-            const container = document.getElementById('container');
-            html2canvas(container).then(canvas => {
+            const card = document.getElementById('card');
+            html2canvas(card).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'capture.png';
                 link.href = canvas.toDataURL();
